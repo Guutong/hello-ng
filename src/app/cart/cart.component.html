@@ -1,0 +1,14 @@
+<h3>Shipping</h3>
+<div class="cart-item" *ngFor="let shipping of shippings">
+  <span>{{shipping.type}}</span>
+  <span>{{shipping.price | currency}}</span>
+</div>
+
+<h3>Cart</h3>
+<div class="cart-item" *ngFor="let item of items">
+  <span>{{item.name}}</span>
+  <span>{{item.price | currency}}</span>
+</div>
+<button (click)="clearCart()">
+  <i class="material-icons">remove_shopping_cart</i>Clear Cart
+</button>
