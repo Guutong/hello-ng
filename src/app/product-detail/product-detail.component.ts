@@ -20,7 +20,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      this.product = products.find((product) => product.id === Number(params.get('productId')));
+      this.product = products.find((product) => product._id === Number(params.get('productId')));
     });
   }
 

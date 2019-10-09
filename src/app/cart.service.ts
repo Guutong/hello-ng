@@ -15,8 +15,9 @@ export class CartService {
     this.items.push(product);
   }
 
-  getItems() {
-    return this.items;
+  getItems(): Promise<Product[]> {
+    const url = '/api/carts';
+    return this.http.get<Product[]>(url).toPromise();
   }
 
   clearCart() {
