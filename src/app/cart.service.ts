@@ -12,16 +12,23 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
   addToCart(product: Product) {
-    this.items.push(product);
+    const url = '/api/carts';
+    const body = {
+      name: product.name,
+      price: product.price,
+      description: product.description
+    };
+    return this.http.post(url, body);
   }
 
-  getItems(): Promise<Product[]> {
+  getItems(): Observable<Product[]> {
     const url = '/api/carts';
-    return this.http.get<Product[]>(url).toPromise();
+    return this.http.get<Product[]>(url);
   }
 
   clearCart() {
-    this.items = [];
+    const url = '/api/carts';
+    return this.http.delete(url);
   }
 
   getShipping(): Observable<Shipping[]> {

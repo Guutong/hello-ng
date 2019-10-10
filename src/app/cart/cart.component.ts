@@ -13,14 +13,19 @@ export class CartComponent implements OnInit {
   shippings: Shipping[];
   constructor(private cartService: CartService) { }
 
-  async ngOnInit() {
-    this.items = await this.cartService.getItems();
+  ngOnInit() {
+    this.cartService.getItems().subscribe((products: Product[]) => {
+      this.items = products;
+    });
     this.getShipping();
   }
 
-  async clearCart() {
-    this.cartService.clearCart();
-    this.items = await this.cartService.getItems();
+  clearCart() {
+    this.cartService.clearCart().subscribe(() => {
+      this.cartService.getItems().subscribe((products: Product[]) => {
+        this.items = products;
+      });
+    });
   }
 
   getShipping() {
