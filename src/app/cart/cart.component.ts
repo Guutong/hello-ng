@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product.model';
 import { CartService, Shipping } from '../cart.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,17 @@ export class CartComponent implements OnInit {
 
   items: Product[];
   shippings: Shipping[];
-  constructor(private cartService: CartService) { }
+  public checkoutForm: FormGroup;
+
+  constructor(
+    private cartService: CartService,
+    private formBuilder: FormBuilder
+  ) {
+    this.checkoutForm = this.formBuilder.group({
+      name: '',
+      address: ''
+    });
+  }
 
   ngOnInit() {
     this.cartService.getItems().subscribe((products: Product[]) => {
@@ -32,5 +43,11 @@ export class CartComponent implements OnInit {
     this.cartService.getShipping().subscribe((shippings: Shipping[]) => {
       this.shippings = shippings;
     });
+  }
+
+
+  onSubmit(customerData) {
+    console.warn('Your order has been submitted', customerData);
+    // this.checkoutForm.reset();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product.model';
-import { products } from '../products';
+import { ProductsService } from '../products.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -8,11 +8,23 @@ import { products } from '../products';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[] = products;
+  products: Product[] = [];
 
-  constructor() { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
+    // this.loading.open()
+    this.productsService.getProducts().subscribe(
+      (products) => {
+        this.products = products;
+      },
+      (error) => {
+        // this.popuperr.open()
+        console.log('GetProducts Error', error);
+      }, () => {
+        // this.loading.open()
+        console.log('GetProducts Complete');
+      });
   }
 
   onNotify(product: Product) {
