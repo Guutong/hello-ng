@@ -4,11 +4,13 @@ import { SellerComponent } from './seller.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListProductComponent } from './list-product/list-product.component';
 
 @NgModule({
   declarations: [
     SellerComponent,
-    AddProductComponent
+    AddProductComponent,
+    ListProductComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,15 @@ import { ReactiveFormsModule } from '@angular/forms';
         path: '',
         component: SellerComponent,
         children: [
+          {
+            path: '',
+            redirectTo: 'product/list',
+            pathMatch: 'full'
+          },
+          {
+            path: 'product/list',
+            component: ListProductComponent
+          },
           {
             path: 'product/add',
             component: AddProductComponent
