@@ -35,10 +35,14 @@ import { ReactiveFormsModule } from '@angular/forms';
       {
         path: 'cart',
         component: CartComponent
+      },
+      {
+        path: 'seller',
+        loadChildren: 'src/app/seller/seller.module#SellerModule'
       }
     ])
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
